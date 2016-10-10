@@ -1,0 +1,15 @@
+.idea/
+*.pyc
+*.pyo
+build/
+dist/
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+.DS_Store
+Thumbs.db
+
+# Project related files
+*.db
+*.json

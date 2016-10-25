@@ -1,0 +1,11 @@
+body {
+    background: url("../img/bg.jpg")
+}
+
+.masthead, .mastfoot, .cover-container {
+    width: 64rem;
+}
+
+.site-wrapper {
+    box-shadow: 0rem 0 10rem rgba(0, 0, 0, 0.5) inset;
+}

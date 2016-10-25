@@ -1,2 +1,6 @@
-% rebase('base.tpl')
-        <h1>Hello, world!</h1>
+% rebase('base.tpl', title='Home')
+<h1 class="cover-heading">Raspberry Pi Weather Station.</h1>
+<p class="lead">Project turns Raspberry Pi 2 to personal weather station. Measured quantities are temperature, humidity, air pressure and ambient light. They are transformed to clear charts and statistics.</p>
+<p class="lead">
+    <a href="#" class="btn btn-lg btn-secondary">Get weather</a>
+</p>

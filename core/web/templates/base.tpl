@@ -31,10 +31,10 @@
                         <div class="inner">
                             <h3 class="masthead-brand">Weather Pi</h3>
                             <nav class="nav nav-masthead">
-                                <a class="nav-link active" href="#">Home</a>
-                                <a class="nav-link" href="#">Current weather</a>
-                                <a class="nav-link" href="#">Statistics</a>
-                                <a class="nav-link" href="#">Database</a>
+                                <a class="nav-link {{'active' if page == 'home' else ''}}" href="./">Home</a>
+                                <a class="nav-link {{'active' if page == 'weather' else ''}}" href="./weather">Current weather</a>
+                                <a class="nav-link {{'active' if page == 'stats' else ''}}" href="./stats">Statistics</a>
+                                <a class="nav-link {{'active' if page == 'db' else ''}}" href="./database">Database</a>
                             </nav>
                         </div>
                     </div>

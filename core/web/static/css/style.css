@@ -1,5 +1,5 @@
 body {
-    background: url("../img/bg.jpg") center top repeat-y;
+    background: url("../img/bg.jpg") center top fixed;
     background-size: cover;
     height: auto;
     min-height: 100%;
@@ -30,7 +30,13 @@ body {
 }
 
 .cover {
-    padding: 7.5rem 1.5rem;
+    padding: 17.4rem 1.5rem;
+}
+
+@media (max-width: 86rem) {
+    .cover {
+        padding: 7.5rem 1.5rem;
+    }
 }
 
 @media (max-width: 64rem) {

@@ -39,7 +39,7 @@
                         </div>
                     </div>
 
-                    <div class="inner cover">
+                    <div class="inner cover container">
                         {{!base}}
                     </div>
 

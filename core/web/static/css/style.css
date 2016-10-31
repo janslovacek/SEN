@@ -1,0 +1,61 @@
+body {
+    background: url("../img/bg.jpg") center top fixed;
+    background-size: cover;
+    height: auto;
+    min-height: 100%;
+    box-shadow: 0rem 0 10rem rgba(0, 0, 0, 0.5)
+}
+
+.masthead, .mastfoot, .cover-container {
+    width: 64rem;
+}
+
+.mastfoot {
+    position: relative;
+    bottom: auto;
+}
+
+.masthead {
+    position: relative;
+    top: auto;
+}
+
+.site-wrapper-inner {
+    vertical-align: top;
+}
+
+.site-wrapper {
+    box-shadow: none;
+    min-height: 500px;
+}
+
+.cover {
+    padding: 17.4rem 1.5rem;
+}
+
+@media (max-width: 86rem) {
+    .cover {
+        padding: 7.5rem 1.5rem;
+    }
+}
+
+@media (max-width: 64rem) {
+    html{
+        font-size: 14px;
+    }
+    .masthead, .mastfoot, .cover-container {
+        width: 100%;
+    }
+}
+
+@media (max-width: 40rem) {
+    html{
+        font-size: 13px;
+    }
+    .masthead, .mastfoot, .cover-container {
+        width: 100%;
+    }
+    .cover {
+        padding: 2rem 1.5rem;
+    }
+}

@@ -1,6 +1,7 @@
 from bottle import route, run, template, debug, static_file
 import bottle
 import os
+from core import database_module
 
 
 class Paths(object):
@@ -25,9 +26,12 @@ def stats():
     return template('stats.tpl')
 
 
-@route('/database')
-def db():
-    return template('database.tpl')
+@route('/records')
+def records():
+    db = database_module.DatabaseModule()
+    items = db.get_records()
+    print(items)
+    return template('database.tpl', records=items)
 
 
 @route('/static/<file_path:path>')

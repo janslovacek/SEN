@@ -4,7 +4,6 @@ from helper import IO
 import web
 import sensor_DHT11
 
-db = None
 
 def main():
     print ("Hello, SEN!")

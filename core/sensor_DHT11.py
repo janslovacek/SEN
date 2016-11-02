@@ -16,7 +16,7 @@ class SensorDht11:
     def __init__(self):
         GPIO.setup(self.__DHT_PIN, GPIO.IN)
 
-    def get_temp_hum(self):
+    def get_hum_temp(self):
         """Returns:
                 Two floating point values. First value represents humidity, second
                 temperature. Values 'None' can be returned after 20 unsuccessful attempts
@@ -32,7 +32,7 @@ class SensorDht11:
                 if humidity is not None and temperature is not None:
                     break
             except Exception as e:
-                logging.debug(str(e))
+                logging.info(str(e))
                 humidity = None
                 temperature = None
             logging.debug('None returned from dht11.')

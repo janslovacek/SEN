@@ -1,9 +1,7 @@
 from database_module import DatabaseModule
 from helper import IO
 import RPi.GPIO as GPIO
-import sensor_rgbw
-import sensor_DHT11
-import sensor_BMP180
+import meteo_station
 
 def main():
     print ("Hello, SEN!")
@@ -11,13 +9,13 @@ def main():
     #IO.print_to_json("data.json", database.get_records())
     #web_server.run_server()
 
-    GPIO.setmode(GPIO.BCM)
-    dht11 = sensor_DHT11.SensorDht11()
-    dht11.get_temp_hum()
-    rgbw = sensor_rgbw.SensorRgbw()
-    rgbw.get_rgbw()
-    bmp180 = sensor_BMP180.SensorBmp180()
-    bmp180.get_temp_press()
+    station = meteo_station.MeteoStation()
+    dht_h, dht_t = station.get_dht11_hum_temp()
+    print('Temp: {0:0.1f} C \nHumidity: {1:0.1f} %'.format(dht_h, dht_t))
+    bmp_t, bmp_p, bmp_a = station.get_bmp180_temp_press_alt()
+    print('Temp: {0:0.1f} C \nPressure: {1:0.1f} Pa\nAltitude: {2:0.1f} m'.format(bmp_t, bmp_p, bmp_a))
+    rgbw_r, rgbw_g, rgbw_b, rgbw_w = station.get_rgbw()
+    print('Red: {0} \nGreen: {1} \nBlue: {2} \nWhite: {3} '.format(rgbw_r, rgbw_g, rgbw_b, rgbw_w))
     GPIO.cleanup()
 
 if __name__ == '__main__':

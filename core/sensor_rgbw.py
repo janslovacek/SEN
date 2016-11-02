@@ -18,7 +18,6 @@ class SensorRgbw:
         # configure rgbw sensor
         self.bus.write_word_data(self.__RGBW_DEV_ADDR, self.__RGBW_CONF_REG_ADDR, self.__RGBW_CONFIG_WORD)
 
-
     def __read(self, cmd):
         return self.bus.read_word_data(self.__RGBW_DEV_ADDR, cmd)
 
@@ -30,12 +29,12 @@ class SensorRgbw:
             blue = ByteOperations.swap_1st_and_2nd_byte(self.__read(self.__BLUE_CMD))
             white = ByteOperations.swap_1st_and_2nd_byte(self.__read(self.__WHITE_CMD))
         except Exception as e:
-            logging.debug(str(e))
+            logging.info(str(e))
             red, green, blue, white = None
-        logging.info("RED: {0}".format(red))
-        logging.info("GREEN: {0}".format(green))
-        logging.info("BLUE: {0}".format(blue))
-        logging.info("WHITE: {0}".format(white))
+        logging.debug("RED: {0}".format(red))
+        logging.debug("GREEN: {0}".format(green))
+        logging.debug("BLUE: {0}".format(blue))
+        logging.debug("WHITE: {0}".format(white))
         return red, green, blue, white
 
 

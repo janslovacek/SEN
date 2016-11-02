@@ -1,8 +1,8 @@
-import RPi.GPIO as GPIO
-import sensor_rgbw
-import sensor_DHT11
-import sensor_BMP180
 import logging
+import RPi.GPIO as GPIO
+from meteo import sensor_BMP180
+from meteo import sensor_rgbw
+from meteo import sensor_DHT11
 
 
 class MeteoStation:

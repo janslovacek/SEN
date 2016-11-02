@@ -3,8 +3,14 @@ import os
 import sys
 import logging
 import time
+from enum import Enum
 
 logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
+
+
+class Sort(Enum):
+    ASC = 1
+    DESC = 2
 
 
 class DatabaseModule:
@@ -12,11 +18,13 @@ class DatabaseModule:
 
     # Record table definition
     # noinspection SqlNoDataSourceInspection,SqlDialectInspection
-    _TABLE_RECORD = '''CREATE TABLE records (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            temperature real,
-            humidity real,
-            created real)'''
+    _TABLE_RECORD = 'CREATE TABLE records (' \
+                    'id INTEGER PRIMARY KEY AUTOINCREMENT,' \
+                    'temperature real, ' \
+                    'humidity real, ' \
+                    'pressure real, ' \
+                    'rgwb int, ' \
+                    'created real)'
 
     def __init__(self):
         self.__init_sqlite_db()
@@ -26,14 +34,14 @@ class DatabaseModule:
 
     # Fill database with test data
     def __create_test_data(self):
-        self.add_record(24, 15)
-        self.add_record(34, 99)
-        self.add_record(13, 78)
-        self.add_record(42, 56)
-        self.add_record(32, 48)
-        self.add_record(31, 12)
-        self.add_record(23, 18)
-        self.add_record(44, 48)
+        self.add_record(24, 15, 34, 56)
+        self.add_record(34, 99, 75, 32)
+        self.add_record(13, 78, 32, 11)
+        self.add_record(42, 56, 24, 34)
+        self.add_record(32, 48, 84, 43)
+        self.add_record(31, 12, 35, 2)
+        self.add_record(23, 18, 11, 13)
+        self.add_record(44, 48, 2, 65)
 
     # Initialize sqlite database
     def __init_sqlite_db(self):
@@ -64,22 +72,28 @@ class DatabaseModule:
         pass
 
     # Adds new record into database
-    def add_record(self, temp, humidity):
+    def add_record(self, temp, humidity, pressure, rgwb):
         cursor = self.conn.cursor()
 
-        current_millis = time.mktime(time.localtime())*1000
-        values = (temp, humidity, current_millis)
+        current_millis = time.mktime(time.localtime()) * 1000
+        values = (temp, humidity, pressure, rgwb, current_millis)
         # noinspection SqlNoDataSourceInspection
-        cursor.execute('''INSERT INTO records(temperature, humidity, created) VALUES (?,?,?)''', values)
+        cursor.execute('INSERT INTO records'
+                       '(temperature, humidity, pressure, rgwb, created) '
+                       'VALUES (?,?,?,?,?)',
+                       values)
         self.conn.commit()
         logging.info("New record successfully added")
 
     # Gets records with from specific time
-    def get_records_since(self, millis, limit=-1, offset=0):
+    def get_records_since(self, millis, limit=-1, offset=0, sort=Sort.ASC):
         cursor = self.conn.cursor()
 
         values = (millis, limit, offset)
-        cursor.execute('SELECT * FROM records WHERE created >= ? LIMIT ? OFFSET ?', values)
+        cursor.execute('SELECT * FROM records'
+                       ' WHERE created >= ?'
+                       ' ORDER BY created ' + ('ASC' if sort == Sort.ASC else 'DESC') +
+                       ' LIMIT ? OFFSET ?', values)
         result = cursor.fetchall()
         # Print number of results
         logging.debug("Found " + str(len(result)) + " rows")
@@ -88,5 +102,21 @@ class DatabaseModule:
 
     # Gets records with specific limit and offset
     # For retrieving all records with specific offset, pass -1 as limit
-    def get_records(self, limit=-1, offset=0):
-        return self.get_records_since(0, limit, offset)
+    def get_records(self, limit=-1, offset=0, sort=Sort.ASC):
+        return self.get_records_since(0, limit, offset, sort)
+
+    # Gets last record from database
+    def get_last_record(self):
+        return self.get_records(1, 0, Sort.DESC)
+
+    # Returns average values of all records
+    def get_average_values(self):
+        cursor = self.conn.cursor()
+
+        cursor.execute('SELECT '
+                       'AVG(temperature), '
+                       'AVG(humidity), '
+                       'AVG(pressure), '
+                       'AVG(rgwb)'
+                       'FROM records')
+        return cursor.fetchall()

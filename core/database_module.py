@@ -14,6 +14,9 @@ class Sort(Enum):
 
 
 class DatabaseModule:
+    """Records are returned as:
+            Tuple (id, temp, humidity, pressure, red, green, blue, white, created[as millis]).
+    """
     _DATABASE_NAME = 'sen_database.db'
 
     # Record table definition
@@ -23,7 +26,10 @@ class DatabaseModule:
                     'temperature real, ' \
                     'humidity real, ' \
                     'pressure real, ' \
-                    'rgwb int, ' \
+                    'red int, ' \
+                    'green int, ' \
+                    'blue int, ' \
+                    'white int, ' \
                     'created real)'
 
     def __init__(self):
@@ -34,14 +40,14 @@ class DatabaseModule:
 
     # Fill database with test data
     def __create_test_data(self):
-        self.add_record(24, 15, 34, 56)
-        self.add_record(34, 99, 75, 32)
-        self.add_record(13, 78, 32, 11)
-        self.add_record(42, 56, 24, 34)
-        self.add_record(32, 48, 84, 43)
-        self.add_record(31, 12, 35, 2)
-        self.add_record(23, 18, 11, 13)
-        self.add_record(44, 48, 2, 65)
+        self.add_record(24, 15, 34, 56, 43, 23, 52)
+        self.add_record(34, 99, 75, 32, 15, 34, 56)
+        self.add_record(13, 78, 32, 11, 48, 84, 43)
+        self.add_record(42, 56, 24, 34, 18, 11, 13)
+        self.add_record(32, 48, 84, 43, 99, 75, 32)
+        self.add_record(31, 12, 35, 21, 56, 24, 34)
+        self.add_record(23, 18, 11, 13, 44, 48, 25)
+        self.add_record(44, 48, 21, 65, 56, 24, 34)
 
     # Initialize sqlite database
     def __init_sqlite_db(self):
@@ -55,9 +61,9 @@ class DatabaseModule:
             logging.debug("Database is not created. Creating new one...")
             self.__create_database(self.conn)
             logging.debug("Database successfully created")
-            logging.debug("Adding test data...")
-            self.__create_test_data()
-            logging.debug("Test data successfully added")
+            # logging.debug("Adding test data...")
+            # self.__create_test_data()
+            # logging.debug("Test data successfully added")
 
         logging.info("Initialization of database successfully finished")
 
@@ -72,15 +78,15 @@ class DatabaseModule:
         pass
 
     # Adds new record into database
-    def add_record(self, temp, humidity, pressure, rgwb):
+    def add_record(self, temp, humidity, pressure, red, green, blue, white):
         cursor = self.conn.cursor()
 
         current_millis = time.mktime(time.localtime()) * 1000
-        values = (temp, humidity, pressure, rgwb, current_millis)
+        values = (temp, humidity, pressure, red, green, blue, white, current_millis)
         # noinspection SqlNoDataSourceInspection
         cursor.execute('INSERT INTO records'
-                       '(temperature, humidity, pressure, rgwb, created) '
-                       'VALUES (?,?,?,?,?)',
+                       '(temperature, humidity, pressure, red, green, blue, white, created) '
+                       'VALUES (?,?,?,?,?,?,?,?)',
                        values)
         self.conn.commit()
         logging.info("New record successfully added")
@@ -117,6 +123,9 @@ class DatabaseModule:
                        'AVG(temperature), '
                        'AVG(humidity), '
                        'AVG(pressure), '
-                       'AVG(rgwb)'
+                       'AVG(red), '
+                       'AVG(green), '
+                       'AVG(blue), '
+                       'AVG(white)'
                        'FROM records')
         return cursor.fetchall()

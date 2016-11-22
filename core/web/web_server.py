@@ -18,7 +18,9 @@ def home():
 
 @route('/weather')
 def weather():
-    return template('weather.tpl')
+    db = database_module.DatabaseModule()
+    current_weather = db.get_last_record()[0]
+    return template('weather.tpl', record=current_weather)
 
 
 @route('/stats')

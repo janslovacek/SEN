@@ -1,11 +1,8 @@
 import sqlite3
 import os
-import sys
 import logging
 import time
 from enum import Enum
-
-logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
 
 
 class Sort(Enum):

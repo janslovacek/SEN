@@ -24,17 +24,17 @@ class SensorRgbw:
     # data byte low = LSB, data byte high = MSB
     def get_rgbw(self):
         try:
-            red = ByteOperations.swap_1st_and_2nd_byte(self.__read(self.__RED_CMD))
-            green = ByteOperations.swap_1st_and_2nd_byte(self.__read(self.__GREEN_CMD))
-            blue = ByteOperations.swap_1st_and_2nd_byte(self.__read(self.__BLUE_CMD))
-            white = ByteOperations.swap_1st_and_2nd_byte(self.__read(self.__WHITE_CMD))
+            red = self.__read(self.__RED_CMD)
+            green = self.__read(self.__GREEN_CMD)
+            blue = self.__read(self.__BLUE_CMD)
+            white = self.__read(self.__WHITE_CMD)
         except Exception as e:
             logging.info(str(e))
             red, green, blue, white = None
-        logging.debug("RED: {0}".format(red))
-        logging.debug("GREEN: {0}".format(green))
-        logging.debug("BLUE: {0}".format(blue))
-        logging.debug("WHITE: {0}".format(white))
+        logging.info("RED: {0}".format(red))
+        logging.info("GREEN: {0}".format(green))
+        logging.info("BLUE: {0}".format(blue))
+        logging.info("WHITE: {0}".format(white))
         return red, green, blue, white
 
 

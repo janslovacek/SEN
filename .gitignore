@@ -13,3 +13,4 @@ Thumbs.db
 # Project related files
 *.db
 *.json
+*.log

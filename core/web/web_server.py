@@ -1,6 +1,8 @@
 from bottle import route, run, template, debug, static_file
 import bottle
 import os
+from core import database_module
+from core.helper import IO
 
 
 class Paths(object):
@@ -17,7 +19,9 @@ def home():
 
 @route('/weather')
 def weather():
-    return template('weather.tpl')
+    db = database_module.DatabaseModule()
+    current_weather = db.get_last_record()[0]
+    return template('weather.tpl', record=current_weather)
 
 
 @route('/stats')
@@ -25,9 +29,19 @@ def stats():
     return template('stats.tpl')
 
 
-@route('/database')
-def db():
-    return template('database.tpl')
+@route('/records')
+def records():
+    db = database_module.DatabaseModule()
+    items = db.get_records()
+    print(items)
+    return template('database.tpl', records=items)
+
+@route('/json')
+def json():
+    db = database_module.DatabaseModule()
+    items = db.get_records()
+    chart_json = IO.records_to_chart_json(items)
+    return chart_json
 
 
 @route('/static/<file_path:path>')

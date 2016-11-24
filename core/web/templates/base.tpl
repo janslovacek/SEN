@@ -34,7 +34,7 @@
                                 <a class="nav-link {{'active' if page == 'home' else ''}}" href="./">Home</a>
                                 <a class="nav-link {{'active' if page == 'weather' else ''}}" href="./weather">Current weather</a>
                                 <a class="nav-link {{'active' if page == 'stats' else ''}}" href="./stats">Statistics</a>
-                                <a class="nav-link {{'active' if page == 'db' else ''}}" href="./database">Database</a>
+                                <a class="nav-link {{'active' if page == 'db' else ''}}" href="./records">Records</a>
                             </nav>
                         </div>
                     </div>
@@ -56,5 +56,7 @@
         <script src="./static/js/jquery-3.1.1.min.js"></script>
         <script src="./static/js/tether.min.js"></script>
         <script src="./static/js/bootstrap.min.js"></script>
+        <script src="./static/js/highcharts.js"></script>
+        <script src="./static/js/chart.js"></script>
     </body>
 </html>

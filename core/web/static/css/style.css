@@ -6,6 +6,32 @@ body {
     box-shadow: 0rem 0 10rem rgba(0, 0, 0, 0.5)
 }
 
+.table{
+    box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.4);
+    background-color: rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.table thead {
+    background: rgba(0, 0, 0, 0.08);
+}
+
+.card {
+    background: rgba(0, 0, 0, 0.11);
+    box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.25);
+}
+
+.card-header {
+    background: rgba(0, 0, 0, 0.11);
+}
+
+.table thead th {
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+}
+.table td, .table th {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: left;
+}
 .masthead, .mastfoot, .cover-container {
     width: 64rem;
 }
@@ -29,13 +55,43 @@ body {
     min-height: 500px;
 }
 
-.cover {
-    padding: 17.4rem 1.5rem;
+
+#records {
+    padding: 2rem 0;
+}
+
+#home {
+    padding: 17.4rem 0;
+}
+
+#weather {
+    padding: 17.4rem 0;
+}
+
+#chart-canvas {
+    background: white;
+    border-radius:8px;
+    overflow: hidden;
+}
+
+.chart {
+    min-width: 320px;
+    height: 280px;
+    margin: 0 auto;
+    margin: 16px;
+}
+
+.chart *{
+    text-shadow: none;
 }
 
 @media (max-width: 86rem) {
-    .cover {
-        padding: 7.5rem 1.5rem;
+    #home {
+        padding: 7.5rem 0;
+    }
+
+    #weather {
+        padding: 8.7rem 0;
     }
 }
 
@@ -55,7 +111,10 @@ body {
     .masthead, .mastfoot, .cover-container {
         width: 100%;
     }
-    .cover {
-        padding: 2rem 1.5rem;
+    #home {
+        padding: 2rem 0;
+    }
+    #weather {
+        padding: 2rem 0;
     }
 }

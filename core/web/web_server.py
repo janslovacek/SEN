@@ -2,6 +2,7 @@ from bottle import route, run, template, debug, static_file
 import bottle
 import os
 from core import database_module
+from core.helper import IO
 
 
 class Paths(object):
@@ -34,6 +35,13 @@ def records():
     items = db.get_records()
     print(items)
     return template('database.tpl', records=items)
+
+@route('/json')
+def json():
+    db = database_module.DatabaseModule()
+    items = db.get_records()
+    chart_json = IO.records_to_chart_json(items)
+    return chart_json
 
 
 @route('/static/<file_path:path>')

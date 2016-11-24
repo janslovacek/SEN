@@ -68,6 +68,23 @@ body {
     padding: 17.4rem 0;
 }
 
+#chart-canvas {
+    background: white;
+    border-radius:8px;
+    overflow: hidden;
+}
+
+.chart {
+    min-width: 320px;
+    height: 280px;
+    margin: 0 auto;
+    margin: 16px;
+}
+
+.chart *{
+    text-shadow: none;
+}
+
 @media (max-width: 86rem) {
     #home {
         padding: 7.5rem 0;

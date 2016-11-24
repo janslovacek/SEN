@@ -22,7 +22,7 @@
             <div class="card">
                 <h5 class="card-header">Air pressure</h5>
                 <div class="card-block">
-                    <h1 class="card-title">{{record[3]}} hPa</h1>
+                    <h1 class="card-title">{{record[3] // 100}} hPa</h1>
                 </div>
             </div>
         </div>
@@ -39,8 +39,8 @@
         <div class="col-md-12 text-md-right">
             <%
             from datetime import datetime
-            date_time = datetime.fromtimestamp(record[5]/1000.0)
-            date = date_time.strftime('%B %m %Y')
+            date_time = datetime.fromtimestamp(record[8]/1000.0)
+            date = date_time.strftime('%B %e %Y')
             time = date_time.strftime('%H:%M')
             %>
             <small>Last measurement was made in {{date}} at {{time}} </small>

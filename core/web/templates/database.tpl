@@ -19,8 +19,8 @@
                 <tr>
                     <th scope="row">{{item[0]}}</th>
                     <%
-                    date_time = datetime.fromtimestamp(item[5]/1000.0)
-                    date = date_time.strftime('%b %m %Y')
+                    date_time = datetime.fromtimestamp(item[8]/1000.0)
+                    date = date_time.strftime('%b %e %Y')
                     time = date_time.strftime('%H:%M:%S')
                     %>
                     <td>{{date}}</td>

@@ -6,7 +6,6 @@ small variation for each data set, and a mouse/touch event handler to bind the c
 
 $(function () {
 
-    Highcharts.setOptions(Highcharts.theme);
     /**
      * In order to synchronize tooltips and crosshairs, override the
      * built-in events with handlers defined on the parent element.
@@ -66,9 +65,6 @@ $(function () {
 
             // Add X values
             dataset.data = Highcharts.map(dataset.data, function (val, j) {
-                //var date = new Date(activity.xData[j]);
-                //var item = Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes());
-                //window.alert(activity.xData[j]);
                 return [activity.xData[j], val];
             });
 

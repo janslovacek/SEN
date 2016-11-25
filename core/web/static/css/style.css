@@ -68,10 +68,15 @@ body {
     padding: 17.4rem 0;
 }
 
-#chart-canvas {
+#rgbw-chart, #chart-canvas {
     background: white;
     border-radius:8px;
     overflow: hidden;
+}
+
+#rgbw-chart {
+    margin-top: 15px;
+    padding: 15px;
 }
 
 .chart {
@@ -81,7 +86,7 @@ body {
     margin: 16px;
 }
 
-.chart *{
+#rgbw-chart *, .chart *{
     text-shadow: none;
 }
 

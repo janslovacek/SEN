@@ -66,7 +66,19 @@ class IO:
             chart_json["datasets"][0]["data"].append(item[1])
             chart_json["datasets"][1]["data"].append(item[2])
             chart_json["datasets"][2]["data"].append(item[3] / 100)
-            #chart_json["datasets"][3]["data"].append(item[4])
-
         return chart_json
 
+    @staticmethod
+    def rgbw_to_json(records):
+        chart_json = {
+            "red": [],
+            "green": [],
+            "blue": [],
+            "white": []
+        }
+        for item in records:
+            chart_json["red"].append([item[8], item[4]])
+            chart_json["green"].append([item[8], item[5]])
+            chart_json["blue"].append([item[8], item[6]])
+            chart_json["white"].append([item[8], item[7]])
+        return chart_json

@@ -2,8 +2,8 @@ import json
 import sys
 from datetime import datetime
 
-class IO:
 
+class IO:
     def __init__(self):
         pass
 
@@ -12,11 +12,29 @@ class IO:
         try:
             outfile = open(filename, 'w')
         except IOError:
-            print ("Unable to write data file\nDirectory exists?")
+            print("Unable to write data file\nDirectory exists?")
             sys.exit(1)
 
         json.dump(data, outfile, default=lambda o: o.__dict__)
         outfile.close()
+
+    @staticmethod
+    def get_cloud_value(red, green, blue, white):
+        """Returns specific cloud type according to rgbw values
+            0 - dark (less than 200)
+            1 - cloudy (200 - 25k)
+            2 - partly cloudy (25k - 40k)
+            3 - clear ( more than 40k)
+        """
+        max_value = max(red, green, blue, white)
+        if max_value < 200:
+            return 0
+        elif max_value < 25000:
+            return 1
+        elif max_value < 40000:
+            return 2
+        else:
+            return 3
 
     @staticmethod
     def records_to_chart_json(records):

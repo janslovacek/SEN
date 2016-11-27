@@ -26,11 +26,29 @@
                 </div>
             </div>
         </div>
+        <%
+        from helper import IO
+        sky_status = IO.get_cloud_value(record[4], record[5], record[6], record[7])
+        %>
+
+        <%
+        sky_status_str = None
+        if sky_status == 0:
+            sky_status_str = "Night"
+        elif sky_status == 1:
+            sky_status_str = "Cloudy"
+        elif sky_status == 2:
+            sky_status_str = "Partly cloudy"
+        elif sky_status == 3:
+            sky_status_str = "Clear sky"
+        end
+        %>
+
         <div class="col-md-3">
             <div class="card">
                 <h5 class="card-header">Sky status</h5>
                 <div class="card-block">
-                    <h1 class="card-title">{{record[4]}}</h1>
+                    <h1 class="card-title">{{sky_status_str}}</h1>
                 </div>
             </div>
         </div>

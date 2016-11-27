@@ -28,7 +28,8 @@
                     <td>{{item[1]}} °C</td>
                     <td>{{item[2]}} %</td>
                     <td>{{item[3]}} hpa</td>
-                    <td>{{item[4]}}</td>
+                    % rgbw =  "({}, {}, {}, {})".format(item[4], item[5], item[6], item[7])
+                    <td>{{rgbw}}</td>
                 </tr>
             % end
             </tbody>

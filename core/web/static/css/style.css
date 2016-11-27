@@ -68,7 +68,7 @@ body {
     padding: 17.4rem 0;
 }
 
-#rgbw-chart, #chart-canvas {
+#rgbw-chart, #charts {
     background: white;
     border-radius:8px;
     overflow: hidden;
@@ -86,8 +86,16 @@ body {
     margin: 16px;
 }
 
-#rgbw-chart *, .chart *{
+#acro, #rgbw-chart *, .chart *{
     text-shadow: none;
+}
+
+#charts{
+    padding-bottom: 20px;
+}
+
+#acro{
+    color: #666666;
 }
 
 @media (max-width: 86rem) {

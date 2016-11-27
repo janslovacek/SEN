@@ -89,11 +89,9 @@ $(function () {
                         enabled: false
                     },
                     xAxis: {
-                        crosshair: true,
                         events: {
                             setExtremes: syncExtremes
                         },
-                        //type: "category",
                         type: 'datetime',
                         dateTimeLabelFormats: {
                             month: '%e. %b',
@@ -106,8 +104,29 @@ $(function () {
                         },
                         min: dataset.min,
                         max: dataset.max,
+                        labels: {
+                            style: {
+                                width: '100px',
+                                'min-width': '100px'
+                            },
+
+                            formatter: function() {
+                                if (dataset.name == "Sky status"){
+                                    if (this.value == 0)
+                                        return "N";
+                                    else if (this.value == 1)
+                                        return "C"
+                                    else if (this.value == 2)
+                                        return "PC"
+                                    else if (this.value == 3)
+                                        return "CS"
+                                    else return "Undefined"
+                                }
+                                else return this.value;
+                            }
+                        },
                     },
-                    tooltip: {
+                    /*tooltip: {
                         positioner: function () {
                             return {
                                 x: this.chart.chartWidth - this.label.width, // right aligned
@@ -123,7 +142,7 @@ $(function () {
                             fontSize: '18px'
                         },
                         valueDecimals: dataset.valueDecimals
-                    },
+                    },*/
                     series: [{
                         data: dataset.data,
                         name: dataset.name,

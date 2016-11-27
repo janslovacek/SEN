@@ -42,7 +42,7 @@ class IO:
             "xData": [],
             "datasets": [
                 {
-                    "name": "Temperature",
+                    "name": "Temperature [°C]",
                     "data": [],
                     "unit": "°C",
                     "type": "line",
@@ -51,7 +51,7 @@ class IO:
                     "max": None,
                 },
                 {
-                    "name": "Humidity",
+                    "name": "Humidity [%]",
                     "data": [],
                     "unit": "%",
                     "type": "line",
@@ -60,7 +60,7 @@ class IO:
                     "max": 100,
                 },
                 {
-                    "name": "Air pressure",
+                    "name": "Air pressure [hPa]",
                     "data": [],
                     "unit": "hPa",
                     "type": "line",
@@ -68,15 +68,15 @@ class IO:
                     "min": None,
                     "max": None,
                 },
-                # {
-                #     "name": "Sky status",
-                #     "data": [],
-                #     "unit": "",
-                #     "type": "line",
-                #     "valueDecimals": 0,
-                #     "min": 0,
-                #     "max": 65536,
-                # },
+                {
+                     "name": "Sky status",
+                     "data": [],
+                     "unit": "",
+                     "type": "line",
+                     "valueDecimals": 0,
+                     "min": 0,
+                     "max": 3,
+                },
             ],
         }
         for item in records:
@@ -84,6 +84,7 @@ class IO:
             chart_json["datasets"][0]["data"].append(item[1])
             chart_json["datasets"][1]["data"].append(item[2])
             chart_json["datasets"][2]["data"].append(item[3] / 100)
+            chart_json["datasets"][3]["data"].append(IO.get_cloud_value(item[4], item[5], item[6], item[7]))
         return chart_json
 
     @staticmethod

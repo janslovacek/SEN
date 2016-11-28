@@ -1,7 +1,5 @@
 import json
 import sys
-from datetime import datetime
-
 
 class IO:
     def __init__(self):

@@ -60,7 +60,7 @@ $(function () {
     }
 
     // Get the data. The contents of the data file can be viewed at
-    $.getJSON('http://78.45.144.9:8080/json', function (activity) {
+    $.getJSON('json', function (activity) {
         $.each(activity.datasets, function (i, dataset) {
 
             // Add X values

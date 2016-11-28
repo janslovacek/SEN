@@ -43,12 +43,11 @@ $(function () {
         }
     };
 
-    $.getJSON('http://78.45.144.9:8080/rgbw_json', function (json_data) {
+    $.getJSON('rgbw_json', function (json_data) {
         chart.series[1].data = json_data.red;
         chart.series[2].data = json_data.green;
         chart.series[3].data = json_data.blue;
         chart.series[0].data = json_data.white;
         Highcharts.chart('rgbw-chart', chart);
     });
-    //Highcharts.chart('rgbw-chart', chart);
 });
